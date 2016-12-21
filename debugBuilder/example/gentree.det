@@ -1,0 +1,4 @@
+KERSRC="/extra/kernel/linux/"
+KERDIR="dir.det"
+KTEMPDIR="athtmp"
+KPERL="/usr/bin/perl"

@@ -1,0 +1,20 @@
+use strict;
+my @file=(<>);
+my $temp=join " ",@file;
+#while ($temp =~/\([^\(]*\)\s*{/g)
+$temp =~s/~/<REF>/g;
+##$temp =~s/\s([^\s]*)\s*\([^\(]*\)\s*{<([0-1]+)>{[^(}<\2>})]*}<\2>}/<<<$&>>>/msg;
+$temp =~s/{<1>{/~/g;
+$temp =~s/}<1>}/~/g;
+##$temp =~s/\s([^\s]*)\s*\([^\(]*\)\s*~[^~]*~/<<< $&{{\1}}>>>/msg;
+$temp =~s/\s([^\s]*)(\s*\([^\(]*\)\s*)~([^~]*)~/<<< \1\2\{\nprintk\(KERN_DEBUG "WiFiZero : Entering : <\1>\\n"\);\n\3\nprintk\(KERN_DEBUG "WiFiZero : Leving : <\1>\\n"\);\n\}>>>/msg;
+##$temp =~s/\s([^\s]*)(\s*\([^\(]*\)\s*)~([^~]*)(return\s[^\s]+;)~/<<< \1\2\{\nprintk\(KERN_DEBUG "WMETTER : Entering : <\1>\\n"\);\n\3\nprintk\(KERN_DEBUG "WMETTER : Leving : <\1>\\n"\);\n\4\n\}>>>/msg;
+## return -EIO;
+##$temp =~s/~/{/g;
+$temp =~s/}<[0-9]+>}/}/g;
+$temp =~s/{<[0-9]+>{/{/g;
+$temp =~s/<<<//g;
+$temp =~s/>>>//g;
+$temp =~s/\~([^\~]*)\~/{\1}/g;
+$temp =~s/<REF>/\~/g;
+print $temp;

@@ -1,0 +1,42 @@
+#!/bin/bash 
+
+CONFF="gentree.det"
+MYPWD=$(pwd)
+
+#Reading conf
+
+if [ -f $MYPWD/$CONFF ]
+then
+        . $MYPWD/$CONFF
+else
+        echo $"No configuration file found"
+        exit 1
+fi
+
+cd $KERSRC/
+
+for mykdir in `cat $MYPWD/$KERDIR`
+do
+	cd $mykdir
+	echo "Clerning $mykdir ..."
+	make -C /lib/modules/$(uname -r)/build M=$(pwd) clean
+	rm -rf *.o
+	echo "Building $mykdir ..."
+	make -C /lib/modules/$(uname -r)/build M=$(pwd) modules
+	cd $KERSRC
+	ATHR=$?
+	if [ $ATHR -ne 0 ]
+	then
+		echo "Somthing wrong in $mykdir ..."
+		exit 1
+	fi
+done
+
+for mykdir in `cat $MYPWD/$KERDIR`
+do
+        cd $mykdir
+	make -C /lib/modules/$(uname -r)/build M=$(pwd) modules_install
+        cd $KERSRC
+done
+
+exit 0

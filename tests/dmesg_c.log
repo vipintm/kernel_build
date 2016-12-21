@@ -1,0 +1,12 @@
+[  317.184172] WiFiZero : Entering : <nl80211_pre_doit>
+[  317.184173] WiFiZero : Entering : <nl80211_get_protocol_features>
+[  317.184174] WiFiZero : Entering : <*nl80211hdr_put>
+[  317.184175] WiFiZero : Entering : <nl80211_post_doit>
+[  317.184176] WiFiZero : Leving : <nl80211_post_doit>
+[  317.184187] WiFiZero : Entering : <nl80211_dump_wiphy>
+[  317.184188] WiFiZero : Entering : <nl80211_dump_wiphy_parse>
+[  317.184189] WiFiZero : Entering : <nl80211_dump_wiphy_done>
+[  317.184194] WiFiZero : Entering : <nl80211_netlink_notify>
+[  317.184194] WiFiZero : Entering : <regulatory_netlink_notify>
+[  317.185169] WiFiZero : Entering : <nl80211_netlink_notify>
+[  317.185170] WiFiZero : Entering : <regulatory_netlink_notify>
