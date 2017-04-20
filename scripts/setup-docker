@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ -z $1 ]
+then
+	echo "Exit no name"
+	exit 1
+fi
+dockerName=$1
+if [ -d /extra/galileo2/build/$dockerName ]
+then
+	echo "Then docker $dockerName is present ..."
+	echo "Remove the dir if not using ..."
+	exit 1
+else
+	echo "Create $dockerName ...."
+	mkdir /extra/galileo2/build/$dockerName
+fi
+
+docker pull 80211zero/galilio2-build:stable
+docker run -it -v /extra/galileo2/build/$dockerName:/build --name=galilio2-$dockerName 80211zero/galilio2-build:stable

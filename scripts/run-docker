@@ -1,0 +1,17 @@
+#!/bin/bash
+if [ -z $1 ]
+then
+	echo "Exit no name"
+	exit 1
+fi
+dockerName=$1
+if [ -d /extra/galileo2/build/$dockerName ]
+then
+	docker start $dockerName
+	sleep 5
+	docker attach $dockerName
+	exit $? 
+else
+	echo "Unable to find $dockerName ...."
+	exit 1
+fi
