@@ -1,0 +1,29 @@
+#!/bin/bash
+G1="FTDI_TTL232R-3V3_FTG54DZ4"
+G2="FTDI_FT232R_USB_UART_AI048489"
+GNAME=$1
+if [ "$GNAME" == "g1" ]; then
+	echo "Connecting to Galileo 1 ..."
+	gal="$G1"
+else
+	echo "Connecting to Galileo 2 ..."
+	gal="$G2"
+fi
+
+is_GNAME=$(ls -A -1 /var/run/screen/S-${USER} | grep "^[0-9]*\.$GNAME" | cut -d"." -f2)
+
+if [ "$GNAME" == "$is_GNAME" ]; then
+	echo "The screen is set ...."
+	sleep 3
+	screen -x $GNAME
+else
+	echo "Checking USB serial connect for $GNAME ..."
+	USBd=$(/extra/kernel/rnpc71/scripts/serial_det  | grep "$gal" | cut -d" " -f1)
+	if [ -z $USBd ]; then
+		echo "Unable to find USB for $GNAME ..."
+	else
+		echo "Using $USBd, creating screen $GNAME ..."
+		sleep 3
+		screen -S $GNAME $USBd 115200 –L
+	fi
+fi
