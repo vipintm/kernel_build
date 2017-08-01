@@ -15,5 +15,5 @@ else
 	mkdir /extra/galileo2/build/$dockerName
 fi
 
-docker pull 80211zero/galilio2-build:stable
-docker run -it -v /extra/galileo2/build/$dockerName:/build --name=galilio2-$dockerName 80211zero/galilio2-build:stable
+docker pull galileogen2/buildenv:stable
+docker run -it -v /extra/galileo2/build/$dockerName:/build --name=galilio2-$dockerName galileogen2/buildenv:stable
